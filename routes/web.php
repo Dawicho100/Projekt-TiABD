@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ForegetPasswordManager;
 
 
 /*
@@ -30,3 +31,9 @@ Route::post('/users', [UserController::class, 'store']);
 Route::post('/logout', [UserController::class, 'logout']);
 Route::get('/logowanie', [UserController::class, 'login']);
 Route::post('/users/authenticate', [UserController::class, 'authenticate']);
+Route::get("/reset", [ForegetPasswordManager::class, 'forgotPassword'])->name("forget.password");
+Route::post("/reset", [ForegetPasswordManager::class, 'forgotPasswordPost'])->name("forget.password.post");
+Route::get("/reset-password/{token}", [ForegetPasswordManager::class, 'resetPassword'])
+    ->name("reset.password");
+Route::post("/reset-password", [ForegetPasswordManager::class, "resetPasswordPost"])
+    ->name("reset.password.post");
