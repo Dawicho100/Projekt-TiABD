@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Providers;
-
+use App\Models\FooterContent;
+use App\Models\Pages;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +21,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        view()->composer('*', function ($view) {
+            $pages = Pages::all();
+            $view->with('pages', $pages);
+        });
     }
 }

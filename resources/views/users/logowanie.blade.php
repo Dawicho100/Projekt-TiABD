@@ -61,6 +61,14 @@
                     >
                 </p>
             </div>
+            <div class="mt-8">
+                <p>
+                    Zapomniałeś hasła?
+                    <a href="/reset" class="text-zinc-400 hover:text-black"
+                    >Reset</a
+                    >
+                </p>
+            </div>
         </form>
     </x-box>
 </x-layout>

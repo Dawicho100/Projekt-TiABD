@@ -54,4 +54,30 @@ class UserController extends Controller
         return  back()->withErrors(['email' => 'Zły email lub hasło'])->onlyInput('email');
 
     }
+    public function showUsers()
+    {
+        $users = User::select('id', 'name', 'email', 'user_type', 'opis')->get();
+        $message = "To jest wiadomość do wyświetlenia na stronie.";
+        return view('panels.panel_admina.klienci', compact('users', 'message'));
+    }
+    public function updateDescription(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        if (!$user) {
+            return redirect()->route('usersindex')->with('error', 'Użytkownik nie istnieje.');
+        }
+
+        $user->opis = $request->opis;
+        $user->save();
+
+        return redirect()->route('usersindex')->with('success', 'Opis został zaktualizowany.');
+    }
+
+
+
+
+
+
+
 }
