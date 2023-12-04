@@ -24,6 +24,11 @@ return [
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),
     ],
+    'stripe' => [
+        'key' => env('pk_test_51OHT6eIcXC9mi8vyltXK2qi8jEaJmiNV0yqJWuKE40Mcbav8u1DGOfWu2pw10bHSunp5vfsgoAXfr21mXYI2aGx300d8ZQvMy2'),
+        'secret' => env('sk_test_51OHT6eIcXC9mi8vystOvPutjXugM8Qwmgvbv09sST5JMufm5xb7NWp19eg2THnzI0Ocubrlpfc0vpVYdYNNy7RMr00C0i85xhk'),
+    ],
+
 
     'ses' => [
         'key' => env('AWS_ACCESS_KEY_ID'),

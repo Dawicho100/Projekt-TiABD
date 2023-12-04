@@ -17,6 +17,6 @@ class parameters extends Model
     ];
     public function products()
     {
-        return $this->belongsToMany('App\products');
+        return $this->belongsToMany(products::class, 'parameters_products');
     }
 }

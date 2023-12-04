@@ -13,7 +13,6 @@ class DostawaController extends Controller
         $dostawy = Dostawa::all();
         return view('panels.panel_admina.dostawa', ['dostawy' => $dostawy]);
     }
-
     public function store(Request $request)
     {
         $dostawa = new Dostawa;

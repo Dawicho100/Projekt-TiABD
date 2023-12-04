@@ -15,4 +15,8 @@ class Dostawa extends Model
         'cena',
         'how_long',
     ];
+    public function zamowienie()
+    {
+        return $this->hasMany(zamowienia::class, 'id_dostawy', 'id');
+    }
 }

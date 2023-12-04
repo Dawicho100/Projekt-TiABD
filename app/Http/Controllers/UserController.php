@@ -54,9 +54,52 @@ class UserController extends Controller
         return  back()->withErrors(['email' => 'Zły email lub hasło'])->onlyInput('email');
 
     }
+    public function edit($id)
+    {
+        $user = User::find($id);
+        return view('panels.panel_user.edit', ['user' => $user]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        if (!$user) {
+            return redirect()->route('usersindex')->with('error', 'Użytkownik nie istnieje.');
+        }
+
+        $request->validate([
+            'name' => [ 'min:3'],
+            'email' => ['email', Rule::unique('users', 'email')->ignore($user->id)],
+
+            'password' => ['nullable', 'confirmed', 'min:6', function ($attribute, $value, $fail) use ($request) {
+                // Walidacja hasła (dowolne warunki mogą być dodane)
+                if (!preg_match('/[A-Z]/', $value) || !preg_match('/[0-9]/', $value)) {
+                    $fail('Hasło musi zawierać co najmniej jedną dużą literę i jedną cyfrę.');
+                }
+            }],
+        ]);
+
+        // Aktualizacja pozostałych pól
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->nrtel = $request->nrtel;
+        $user->adres = $request->adres;
+        $user->miasto = $request->miasto;
+
+        // Aktualizacja hasła, jeśli zostało wprowadzone
+        if ($request->password) {
+            $user->password = bcrypt($request->password);
+        }
+
+        $user->save();
+
+        return redirect()->route('users.edit', ['id' => auth()->user()->id])->with('success', 'Dane użytkownika zostały zaktualizowane.');
+    }
+
     public function showUsers()
     {
-        $users = User::select('id', 'name', 'email', 'user_type', 'opis')->get();
+        $users = User::select('id', 'name', 'email', 'user_type', 'opis', 'adres', 'miasto')->get();
         $message = "To jest wiadomość do wyświetlenia na stronie.";
         return view('panels.panel_admina.klienci', compact('users', 'message'));
     }

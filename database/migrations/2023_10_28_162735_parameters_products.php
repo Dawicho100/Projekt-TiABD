@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('parameters_products', function (Blueprint $table) {
-            $table->integer('Id_parameters');
-            $table->integer('Id_product');
+            $table->integer('parameters_id');
+            $table->integer('products_id');
         });
     }
 

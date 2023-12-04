@@ -1,4 +1,5 @@
 <x-layout>
+    <x-admin>
     <h1 class="text-3xl font-semibold">Zarządzaj Treściami Stron</h1>
 
     @if (session('success'))
@@ -165,4 +166,5 @@
             {{ session('error') }}
         </div>
     @endif
+    </x-admin>
 </x-layout>

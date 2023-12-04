@@ -20,6 +20,10 @@ return new class extends Migration
             $table->rememberToken();
             $table->string('User_type')->default('klient');
             $table->timestamps();
+            $table->longText('opis')->nullable();
+            $table->string('adres')->nullable();
+            $table->string('miasto')->nullable();
+
         });
     }
 

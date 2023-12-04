@@ -1,7 +1,7 @@
 <x-layout>
+<x-user>
 
-
-    <h1>panel klienta  {{auth()->user()->name}} </h1>
+</x-user>
 </x-layout>
 
 

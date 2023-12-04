@@ -19,7 +19,7 @@ class ForegetPasswordManager extends Controller
     }
     function forgotPasswordPost(Request $request){
     $request->validate([
-        'email' => ['required', 'email', Rule::unique('users', 'email')],
+        'email' => ['required', 'email'],
     ]);
     $token = Str::random(64);
     DB::table('password_reset_tokens')->insert([

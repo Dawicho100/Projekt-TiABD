@@ -13,4 +13,8 @@ class Platnosci extends Model
     protected $fillable = [
         'name'
     ];
+    public function zamowienie()
+    {
+        return $this->hasMany(zamowienia::class, 'id_platnosci', 'id');
+    }
 }
